@@ -1,0 +1,6 @@
+rootProject.name = 'pc-stats-monitor'
+include 'server'
+findProject(':server')?.name = 'pc-stats-monitor-server'
+include 'client'
+findProject(':client')?.name = 'pc-stats-monitor-client'
+

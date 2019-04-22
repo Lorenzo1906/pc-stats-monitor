@@ -1,0 +1,26 @@
+@font-face {
+    font-family: Roboto-Bold;
+    src: url('Roboto-Bold.ttf');
+}
+
+.button {
+    -fx-font-weight: bold;
+}
+
+.root{
+    -fx-background: rgb(0, 0, 0);
+}
+
+.label {
+    -fx-font: 15px Roboto-Bold;
+    -fx-text-fill: aqua;
+}
+
+.separator {
+    -fx-text-fill: aqua;
+}
+
+.separator *.line {
+    -fx-border-color: aqua ;
+    -fx-border-width: 1 0 0 0 ;
+}
