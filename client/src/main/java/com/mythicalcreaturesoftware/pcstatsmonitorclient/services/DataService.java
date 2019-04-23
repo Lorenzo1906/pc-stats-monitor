@@ -1,5 +1,6 @@
 package com.mythicalcreaturesoftware.pcstatsmonitorclient.services;
 
+import com.mythicalcreaturesoftware.pcstatsmonitorclient.utils.ClientKeys;
 import com.mythicalcreaturesoftware.pcstatsmonitorserver.util.Keys;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
@@ -26,6 +27,7 @@ public class DataService extends Service<Void> {
             protected Void call() throws Exception {
                 LOG.info("Connecting with data server...");
 
+                updateMessage(ClientKeys.CONNECTING);
                 InetAddress serverIp = searchServer(100);
 
                 try (Socket socket = new Socket(serverIp, Keys.SERVER_PORT)) {

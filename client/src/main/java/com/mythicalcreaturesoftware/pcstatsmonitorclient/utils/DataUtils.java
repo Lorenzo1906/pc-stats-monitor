@@ -1,5 +1,9 @@
 package com.mythicalcreaturesoftware.pcstatsmonitorclient.utils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class DataUtils {
 
     private static double KILOBYTE_SIZE = 1024;
@@ -16,5 +20,18 @@ public class DataUtils {
 
     public static Double calculatePercentage (double total, double amount) {
         return (amount/total)*PERCENTAGE_TOTAL;
+    }
+
+    public static boolean isJSONValid(String test) {
+        try {
+            new JSONObject(test);
+        } catch (JSONException ex) {
+            try {
+                new JSONArray(test);
+            } catch (JSONException ex1) {
+                return false;
+            }
+        }
+        return true;
     }
 }

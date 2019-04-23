@@ -8,134 +8,143 @@
 <?import eu.hansolo.medusa.Gauge?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mythicalcreaturesoftware.pcstatsmonitorclient.controllers.Controller">
     <children>
-        <BorderPane>
-            <left>
-                <Label fx:id="cpuName" text="Label" BorderPane.alignment="CENTER">
-                    <BorderPane.margin>
-                        <Insets />
-                    </BorderPane.margin>
-                </Label>
-            </left>
-            <right>
-                <Label fx:id="gpuName" text="Label" BorderPane.alignment="CENTER">
-                    <BorderPane.margin>
-                        <Insets />
-                    </BorderPane.margin>
-                </Label>
-            </right>
-        </BorderPane>
-        <Separator prefWidth="200.0" >
-            <VBox.margin>
-                <Insets bottom="10.0" top="10.0" />
-            </VBox.margin>
-        </Separator>
-        <GridPane>
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"  />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-            </rowConstraints>
+        <VBox fx:id="mainContent">
             <children>
-                <Gauge fx:id="cpuUsage"
-                       title="CPU Load (%)"
-                       subTitle="Test"
-                       maxValue="100"
-                       minValue="0"
-                       animated="true"
-                       barColor="aqua"
-                       titleColor="aqua"
-                       valueColor="aqua"
-                       SKIN_TYPE="FLAT" >
-                    <GridPane.margin>
-                        <Insets bottom="10.0" top="10.0" left="10.0" right="10.0"/>
-                    </GridPane.margin>
-                </Gauge>
+                <BorderPane>
+                    <left>
+                        <Label fx:id="cpuName" text="Label" BorderPane.alignment="CENTER">
+                            <BorderPane.margin>
+                                <Insets />
+                            </BorderPane.margin>
+                        </Label>
+                    </left>
+                    <right>
+                        <Label fx:id="gpuName" text="Label" BorderPane.alignment="CENTER">
+                            <BorderPane.margin>
+                                <Insets />
+                            </BorderPane.margin>
+                        </Label>
+                    </right>
+                </BorderPane>
+                <Separator prefWidth="200.0" >
+                    <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                    </VBox.margin>
+                </Separator>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"  />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Gauge fx:id="cpuUsage"
+                               title="CPU Load (%)"
+                               subTitle="Test"
+                               maxValue="100"
+                               minValue="0"
+                               animated="true"
+                               barColor="aqua"
+                               titleColor="aqua"
+                               valueColor="aqua"
+                               SKIN_TYPE="FLAT" >
+                            <GridPane.margin>
+                                <Insets bottom="10.0" top="10.0" left="10.0" right="10.0"/>
+                            </GridPane.margin>
+                        </Gauge>
 
-                <Gauge fx:id="cpuTemp"
-                       title="CPU Temp (°C)"
-                       subTitle="Test"
-                       maxValue="91"
-                       minValue="0"
-                       animated="true"
-                       barColor="aqua"
-                       titleColor="aqua"
-                       valueColor="aqua"
-                       SKIN_TYPE="FLAT"
-                       GridPane.columnIndex="1" >
-                    <GridPane.margin>
-                        <Insets bottom="10.0" top="10.0" left="10.0" right="10.0"/>
-                    </GridPane.margin>
-                </Gauge>
+                        <Gauge fx:id="cpuTemp"
+                               title="CPU Temp (°C)"
+                               subTitle="Test"
+                               maxValue="91"
+                               minValue="0"
+                               animated="true"
+                               barColor="aqua"
+                               titleColor="aqua"
+                               valueColor="aqua"
+                               SKIN_TYPE="FLAT"
+                               GridPane.columnIndex="1" >
+                            <GridPane.margin>
+                                <Insets bottom="10.0" top="10.0" left="10.0" right="10.0"/>
+                            </GridPane.margin>
+                        </Gauge>
 
-                <Gauge fx:id="gpuUsage"
-                       title="GPU Load (%)"
-                       subTitle="Test"
-                       maxValue="100"
-                       minValue="0"
-                       animated="true"
-                       barColor="aqua"
-                       titleColor="aqua"
-                       valueColor="aqua"
-                       SKIN_TYPE="FLAT"
-                       GridPane.rowIndex="1" >
-                    <GridPane.margin>
-                        <Insets bottom="10.0" top="10.0" left="10.0" right="10.0"/>
-                    </GridPane.margin>
-                </Gauge>
+                        <Gauge fx:id="gpuUsage"
+                               title="GPU Load (%)"
+                               subTitle="Test"
+                               maxValue="100"
+                               minValue="0"
+                               animated="true"
+                               barColor="aqua"
+                               titleColor="aqua"
+                               valueColor="aqua"
+                               SKIN_TYPE="FLAT"
+                               GridPane.rowIndex="1" >
+                            <GridPane.margin>
+                                <Insets bottom="10.0" top="10.0" left="10.0" right="10.0"/>
+                            </GridPane.margin>
+                        </Gauge>
 
-                <Gauge fx:id="gpuTemp"
-                       title="GPU Temp (°C)"
-                       subTitle="Test"
-                       maxValue="100"
-                       minValue="0"
-                       animated="true"
-                       barColor="aqua"
-                       titleColor="aqua"
-                       valueColor="aqua"
-                       SKIN_TYPE="FLAT"
-                       GridPane.columnIndex="1" GridPane.rowIndex="1" >
-                    <GridPane.margin>
-                        <Insets bottom="10.0" top="10.0" left="10.0" right="10.0"/>
-                    </GridPane.margin>
-                </Gauge>
+                        <Gauge fx:id="gpuTemp"
+                               title="GPU Temp (°C)"
+                               subTitle="Test"
+                               maxValue="100"
+                               minValue="0"
+                               animated="true"
+                               barColor="aqua"
+                               titleColor="aqua"
+                               valueColor="aqua"
+                               SKIN_TYPE="FLAT"
+                               GridPane.columnIndex="1" GridPane.rowIndex="1" >
+                            <GridPane.margin>
+                                <Insets bottom="10.0" top="10.0" left="10.0" right="10.0"/>
+                            </GridPane.margin>
+                        </Gauge>
 
-                <Gauge fx:id="diskUsage"
-                       title="DIsk Used (%)"
-                       subTitle="Test"
-                       maxValue="100"
-                       minValue="0"
-                       animated="true"
-                       barColor="aqua"
-                       titleColor="aqua"
-                       valueColor="aqua"
-                       SKIN_TYPE="FLAT"
-                       GridPane.rowIndex="2" >
-                    <GridPane.margin>
-                        <Insets bottom="10.0" top="10.0" left="10.0" right="10.0"/>
-                    </GridPane.margin>
-                </Gauge>
+                        <Gauge fx:id="diskUsage"
+                               title="DIsk Used (%)"
+                               subTitle="Test"
+                               maxValue="100"
+                               minValue="0"
+                               animated="true"
+                               barColor="aqua"
+                               titleColor="aqua"
+                               valueColor="aqua"
+                               SKIN_TYPE="FLAT"
+                               GridPane.rowIndex="2" >
+                            <GridPane.margin>
+                                <Insets bottom="10.0" top="10.0" left="10.0" right="10.0"/>
+                            </GridPane.margin>
+                        </Gauge>
 
-                <Gauge fx:id="memUsed"
-                       title="Memory Used (%)"
-                       subTitle="Test"
-                       maxValue="100"
-                       minValue="0"
-                       animated="true"
-                       barColor="aqua"
-                       titleColor="aqua"
-                       valueColor="aqua"
-                       SKIN_TYPE="FLAT"
-                       GridPane.columnIndex="1" GridPane.rowIndex="2" >
-                    <GridPane.margin>
-                        <Insets bottom="10.0" top="10.0" left="10.0" right="10.0"/>
-                    </GridPane.margin>
-                </Gauge>
+                        <Gauge fx:id="memUsed"
+                               title="Memory Used (%)"
+                               subTitle="Test"
+                               maxValue="100"
+                               minValue="0"
+                               animated="true"
+                               barColor="aqua"
+                               titleColor="aqua"
+                               valueColor="aqua"
+                               SKIN_TYPE="FLAT"
+                               GridPane.columnIndex="1" GridPane.rowIndex="2" >
+                            <GridPane.margin>
+                                <Insets bottom="10.0" top="10.0" left="10.0" right="10.0"/>
+                            </GridPane.margin>
+                        </Gauge>
+                    </children>
+                </GridPane>
             </children>
-        </GridPane>
+        </VBox>
+        <BorderPane fx:id="messageContent" visible="false">
+            <center>
+                <Label fx:id="message" text="Connecting..." BorderPane.alignment="CENTER" />
+            </center>
+        </BorderPane>
     </children>
     <padding>
         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
