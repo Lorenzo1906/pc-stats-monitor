@@ -19,10 +19,7 @@ allprojects {
     apply plugin: 'java'
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
-
-    group 'com.mythicalcreaturesoftware'
-    version '1.0-SNAPSHOT'
-
+    
     repositories {
         mavenCentral()
         maven {

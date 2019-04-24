@@ -27,8 +27,37 @@ task fatJar(type: Jar) {
                 'Implementation-Version': version,
                 'Main-Class': 'com.mythicalcreaturesoftware.pcstatsmonitorclient.Main'
     }
-    archiveBaseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
 
+task copyJar(type: Copy) {
+    from "${project.buildDir}/libs"
+    into "${projectDir}/scripts"
+    rename { String fileName ->
+        fileName.replace("-${version}", "")
+    }
+}
+
+task zipJar(type: Zip) {
+    from "${projectDir}/scripts"
+    include '*'
+    include '*/*'
+    archiveName 'client.zip'
+    destinationDir(file("${projectDir}/release"))
+}
+
+task tarJar(type: Tar) {
+    from "${projectDir}/scripts"
+    include '*'
+    include '*/*'
+    archiveName = 'client.tar.gz'
+    destinationDir  file("${projectDir}/release")
+    compression = Compression.GZIP
+}
+
+task release (dependsOn: ['clean', 'fatJar', 'copyJar', 'zipJar', 'tarJar'])
+fatJar.mustRunAfter clean
+copyJar.mustRunAfter fatJar
+tarJar.mustRunAfter copyJar
+zipJar.mustRunAfter copyJar

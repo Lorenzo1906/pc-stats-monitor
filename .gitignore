@@ -3,7 +3,8 @@
 #
 logs/
 out/
-
+libs/
+release/
 
 tomcat
 

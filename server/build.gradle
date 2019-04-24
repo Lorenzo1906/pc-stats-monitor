@@ -23,9 +23,17 @@ dependencies {
 
 task copyLibs(type: Copy) {
     from("${sourceSets.main.output.resourcesDir}/libs")
-    into("${project.buildDir}/libs/libs")
+    into("${projectDir}/scripts/libs")
     include '*.*'
     include 'libs/**'
+}
+
+task copyJar(type: Copy) {
+    from "${project.buildDir}/libs"
+    into "${projectDir}/scripts"
+    rename { String fileName ->
+        fileName.replace("-${version}", "")
+    }
 }
 
 task fatJar(type: Jar) {
@@ -36,12 +44,31 @@ task fatJar(type: Jar) {
                 'Implementation-Version': version,
                 'Main-Class': 'com.mythicalcreaturesoftware.pcstatsmonitorserver.Main'
     }
-    archiveBaseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }{
         exclude '${sourceSets.main.output.resourcesDir}/libs'
     }
     with jar
-    
 }
 
-fatJar.finalizedBy(copyLibs)
+task zipJar(type: Zip) {
+    from "${projectDir}/scripts"
+    include '*'
+    include '*/*'
+    archiveName 'server.zip'
+    destinationDir(file("${projectDir}/release"))
+}
+
+task tarJar(type: Tar) {
+    from "${projectDir}/scripts"
+    include '*'
+    include '*/*'
+    archiveName = 'server.tar.gz'
+    destinationDir  file("${projectDir}/release")
+    compression = Compression.GZIP
+}
+
+task release (dependsOn: ['clean', 'fatJar', 'copyLibs', 'copyJar', 'zipJar', 'tarJar'])
+fatJar.mustRunAfter clean
+copyJar.mustRunAfter fatJar
+tarJar.mustRunAfter copyJar
+zipJar.mustRunAfter copyJar
