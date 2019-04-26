@@ -14,9 +14,9 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.mythicalcreaturesoftware" level="debug" />
+        <Logger name="com.mythicalcreaturesoftware" />
         <Root level="info">
-            <AppenderRef ref="STDOUT" />
+            <AppenderRef ref="STDOUT"/>
             <AppenderRef ref="FILE" />
         </Root>
     </Loggers>

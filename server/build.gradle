@@ -37,16 +37,13 @@ task copyJar(type: Copy) {
 }
 
 task fatJar(type: Jar) {
-    exclude '**/libs'
     manifest {
         attributes 'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
                 'Implementation-Title': 'PC Stats Monitor Server',
                 'Implementation-Version': version,
                 'Main-Class': 'com.mythicalcreaturesoftware.pcstatsmonitorserver.Main'
     }
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }{
-        exclude '${sourceSets.main.output.resourcesDir}/libs'
-    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
 
@@ -68,7 +65,7 @@ task tarJar(type: Tar) {
 }
 
 task release (dependsOn: ['clean', 'fatJar', 'copyLibs', 'copyJar', 'zipJar', 'tarJar'])
-fatJar.mustRunAfter clean
+fatJar.mustRunAfter build
 copyJar.mustRunAfter fatJar
 tarJar.mustRunAfter copyJar
 zipJar.mustRunAfter copyJar

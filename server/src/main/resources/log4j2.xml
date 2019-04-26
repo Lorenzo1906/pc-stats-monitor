@@ -14,11 +14,10 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.mythicalcreaturesoftware.pcstatsmonitorserver" level="debug" >
-        </Logger>
+        <Logger name="com.mythicalcreaturesoftware.pcstatsmonitorserver" />
         <Root level="info">
-            <AppenderRef ref="STDOUT" level="debug"/>
-            <AppenderRef ref="FILE" level="INFO"/>
+            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="FILE" />
         </Root>
     </Loggers>
 </Configuration>

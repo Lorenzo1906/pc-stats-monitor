@@ -17,4 +17,4 @@ if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
 pushd "%CD%"
 CD /D "%~dp0"
 :: BatchGotAdmin (Run as Admin code ends)
-java.exe -jar pc-stats-monitor-server-all-1.0.0.jar
+java.exe -jar pc-stats-monitor-server.jar

@@ -23,7 +23,7 @@ dependencies {
 task fatJar(type: Jar) {
     manifest {
         attributes 'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-                'Implementation-Title': 'PC Stats Monitor Server',
+                'Implementation-Title': 'PC Stats Monitor Client',
                 'Implementation-Version': version,
                 'Main-Class': 'com.mythicalcreaturesoftware.pcstatsmonitorclient.Main'
     }
@@ -57,7 +57,7 @@ task tarJar(type: Tar) {
 }
 
 task release (dependsOn: ['clean', 'fatJar', 'copyJar', 'zipJar', 'tarJar'])
-fatJar.mustRunAfter clean
+fatJar.mustRunAfter build
 copyJar.mustRunAfter fatJar
 tarJar.mustRunAfter copyJar
 zipJar.mustRunAfter copyJar

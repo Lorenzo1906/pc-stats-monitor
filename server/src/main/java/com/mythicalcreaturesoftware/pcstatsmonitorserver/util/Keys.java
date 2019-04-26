@@ -22,4 +22,5 @@ public class Keys {
     public static final String NO_DATA = "-1";
     public static final int SERVER_PORT = 59898;
     public static final int DISCOVERY_SERVER_PORT = 59899;
+    public static final String DEBUG = "debug";
 }

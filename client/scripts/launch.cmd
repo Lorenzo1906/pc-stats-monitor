@@ -1,1 +1,1 @@
-start javaw -jar pc-stats-monitor-client-all-1.0.0.jar
+start javaw -jar pc-stats-monitor-client.jar fullscreen
