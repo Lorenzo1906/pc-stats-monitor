@@ -61,3 +61,4 @@ pom.xml.tag
 
 # gradle project file
 .gradle/
+!gradle/wrapper/*
