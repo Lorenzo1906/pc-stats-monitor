@@ -6,6 +6,9 @@
 <?import javafx.scene.layout.*?>
 
 <?import eu.hansolo.medusa.Gauge?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mythicalcreaturesoftware.pcstatsmonitorclient.controllers.Controller">
     <children>
         <VBox fx:id="mainContent">
@@ -140,6 +143,31 @@
                 </GridPane>
             </children>
         </VBox>
+        <BorderPane fx:id="audioVisualizer" visible="true">
+            <center>
+                <BarChart fx:id="audioVisualizerChart"
+                          legendVisible="false"
+                          animated="false"
+                          barGap="1"
+                          categoryGap="0"
+                          verticalGridLinesVisible="false"
+                          horizontalGridLinesVisible="false"
+                          horizontalZeroLineVisible="false"
+                          verticalZeroLineVisible="false">
+
+                    <xAxis>
+                        <CategoryAxis tickLabelsVisible="false"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis fx:id="numberAxis"
+                                    lowerBound="-50"
+                                    upperBound="50"
+                                    tickUnit="10"
+                                    tickLabelsVisible="false"/>
+                    </yAxis>
+                </BarChart>
+            </center>
+        </BorderPane>
         <BorderPane fx:id="messageContent" visible="false">
             <center>
                 <Label fx:id="message" text="Connecting..." BorderPane.alignment="CENTER" />

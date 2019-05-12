@@ -5,19 +5,24 @@ import com.mythicalcreaturesoftware.pcstatsmonitorclient.utils.ClientKeys;
 import com.mythicalcreaturesoftware.pcstatsmonitorclient.utils.DataUtils;
 import com.mythicalcreaturesoftware.pcstatsmonitorserver.util.Keys;
 import eu.hansolo.medusa.Gauge;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
-import javax.xml.crypto.Data;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     private static final Logger LOG = LogManager.getLogger(Controller.class);
@@ -27,6 +32,9 @@ public class Controller {
 
     @FXML
     private BorderPane messageContent;
+
+    @FXML
+    private BorderPane audioVisualizer;
 
     @FXML
     private Label cpuName;
@@ -55,14 +63,22 @@ public class Controller {
     @FXML
     private Gauge memUsed;
 
+    @FXML
+    private BarChart audioVisualizerChart;
+
+    @FXML
+    private NumberAxis numberAxis;
+
     private DataService dataService;
-    private StringProperty statusMessagesProperty;
+    private List<XYChart.Data<String, Number>> seriesData;
 
     public void initialize() {
         setUpService();
+        initializeAudio();
+        initializeAudioVisualizer();
 
         dataService.messageProperty().addListener(
-            (ObservableValue<? extends Object> observable, Object oldValue, Object newValue)-> {
+            (ObservableValue<?> observable, Object oldValue, Object newValue)-> {
 
                 if (newValue.equals(ClientKeys.CONNECTING)) {
                     LOG.debug("Showing connect message");
@@ -80,8 +96,42 @@ public class Controller {
         dataService.start();
     }
 
+    private void initializeAudio() {
+        File file = new File("/home/lorenzo/Downloads/file_example_WAV_5MG.wav");
+
+        Media media = new Media(file.toURI().toString());
+        MediaPlayer audioMediaPlayer=new MediaPlayer(media);
+        audioMediaPlayer.play();
+
+        audioMediaPlayer.setAudioSpectrumListener((double d, double d1, float[] magnitudes , float[] phases) -> {
+
+            for(int i=0; i<magnitudes.length; i++){
+
+                seriesData.get(i).setYValue((magnitudes[i]+60));
+            }
+
+        });
+    }
+
+    private void initializeAudioVisualizer() {
+        numberAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(numberAxis,null,"dB"));
+
+        int maximumSize = 128;
+        XYChart.Series<String,Number> series1 = new XYChart.Series<>();
+        series1.setName("Series Neg");
+        seriesData = new ArrayList<>();
+
+        for (int i=0; i<maximumSize; i++) {
+            seriesData.add(i, new XYChart.Data<>( Integer.toString(i+1),50));
+            series1.getData().add(seriesData.get(i));
+        }
+
+        audioVisualizerChart.getData().add(series1);
+    }
+
     private void showMessagePane (boolean value) {
         mainContent.setVisible(!value);
+        audioVisualizer.setVisible(!value);
         messageContent.setVisible(value);
     }
 
@@ -137,12 +187,5 @@ public class Controller {
             showMessagePane(true);
             message.setText("Unable to connect");
         });
-    }
-
-    private StringProperty statusMessagesProperty() {
-        if (statusMessagesProperty == null) {
-            statusMessagesProperty = new SimpleStringProperty();
-        }
-        return statusMessagesProperty;
     }
 }
