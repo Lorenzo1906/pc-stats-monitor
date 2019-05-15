@@ -51,11 +51,13 @@ public class StatScanner {
         LOG.debug("Getting windows info");
 
         Map<String, String> results = new HashMap<>();
+        Components components = JSensors.get.components();
 
-        results.put(Keys.GPU_NAME, getGpuName());
-        results.put(Keys.GPU_USAGE, getGpuLoad());
-        results.put(Keys.GPU_TEMP, getGpuTemp());
+        results.put(Keys.GPU_NAME, getGpuName(components));
+        results.put(Keys.GPU_USAGE, getGpuLoad(components));
+        results.put(Keys.GPU_TEMP, getGpuTemp(components));
         results.put(Keys.GPU_SHUTDOWN, Keys.GPU_SHUTDOWN_DEFAULT);//In windows the default is set to 90
+        results.put(Keys.CPU_TEMP, getCpuTemp(components));
         results.putAll(getSharedInformation());
 
         return results;
@@ -65,10 +67,11 @@ public class StatScanner {
         LOG.debug("Getting linux info");
 
         Map<String, String> results = new HashMap<>();
+        Components components = JSensors.get.components();
 
         results.putAll(executeBashScript());
         results.putAll(getSharedInformation());
-        results.put(Keys.CPU_TEMP, getCpuTemp());
+        results.put(Keys.CPU_TEMP, getCpuTemp(components));
 
         return results;
     }
@@ -114,12 +117,11 @@ public class StatScanner {
         return results;
     }
 
-    private String getCpuTemp() {
+    private String getCpuTemp(Components components) {
         LOG.debug("Getting cpu temp");
 
         double cpuTemp = 0d;
 
-        Components components = JSensors.get.components();
         List<com.profesorfalken.jsensors.model.components.Cpu> cpus = components.cpus;
         if (cpus != null) {
             for (final com.profesorfalken.jsensors.model.components.Cpu cpu : cpus) {
@@ -135,12 +137,11 @@ public class StatScanner {
         return String.valueOf(cpuTemp);
     }
 
-    private String getGpuTemp() {
+    private String getGpuTemp(Components components) {
         LOG.debug("Getting gpu temp");
 
         double gpuTemp = 0d;
 
-        Components components = JSensors.get.components();
         List<Gpu> gpus = components.gpus;
         if (gpus != null) {
             for (final Gpu gpu : gpus) {
@@ -156,12 +157,11 @@ public class StatScanner {
         return String.valueOf(gpuTemp);
     }
 
-    private String getGpuLoad() {
+    private String getGpuLoad(Components components) {
         LOG.debug("Getting gpu load");
 
         double gpuLoad = 0d;
 
-        Components components = JSensors.get.components();
         List<Gpu> gpus = components.gpus;
         if (gpus != null) {
             for (final Gpu gpu : gpus) {
@@ -177,10 +177,9 @@ public class StatScanner {
         return String.valueOf(gpuLoad);
     }
 
-    private String getGpuName() {
+    private String getGpuName(Components components) {
         LOG.debug("Getting gpu name");
 
-        Components components = JSensors.get.components();
         List<Gpu> gpus = components.gpus;
         if (gpus != null) {
             for (final Gpu gpu : gpus) {

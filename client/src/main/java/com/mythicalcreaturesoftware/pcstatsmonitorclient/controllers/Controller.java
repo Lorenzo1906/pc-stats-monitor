@@ -93,16 +93,16 @@ public class Controller {
         JSONObject json = new JSONObject(data);
 
         String cpuNameData = json.has(Keys.CPU_NAME) ? json.getString(Keys.CPU_NAME) : "";
-        String cpuUsageData = json.has(Keys.CPU_USAGE) ? json.getString(Keys.CPU_USAGE) : "";
-        String cpuTempData = json.has(Keys.CPU_TEMP) ? json.getString(Keys.CPU_TEMP) : "";
+        String cpuUsageData = json.has(Keys.CPU_USAGE) ? json.getString(Keys.CPU_USAGE) : "0";
+        String cpuTempData = json.has(Keys.CPU_TEMP) ? json.getString(Keys.CPU_TEMP) : "0";
         String gpuNameData = json.has(Keys.GPU_NAME) ? json.getString(Keys.GPU_NAME) : "";
-        String gpuUsageData = json.has(Keys.GPU_USAGE) ? json.getString(Keys.GPU_USAGE) : "";
-        String gpuTempData = json.has(Keys.GPU_TEMP) ? json.getString(Keys.GPU_TEMP) : "";
-        String gpuShutdown = json.has(Keys.GPU_SHUTDOWN) ? json.getString(Keys.GPU_SHUTDOWN) : "";
-        String diskTotalData = json.has(Keys.DISK_TOTAL) ? json.getString(Keys.DISK_TOTAL) : "";
-        String diskUsedData = json.has(Keys.DISK_USED) ? json.getString(Keys.DISK_USED) : "";
-        String memTotalData = json.has(Keys.MEM_TOTAL) ? json.getString(Keys.MEM_TOTAL) : "";
-        String memAvailableData = json.has(Keys.MEM_AVAILABLE) ? json.getString(Keys.MEM_AVAILABLE) : "";
+        String gpuUsageData = json.has(Keys.GPU_USAGE) ? json.getString(Keys.GPU_USAGE) : "0";
+        String gpuTempData = json.has(Keys.GPU_TEMP) ? json.getString(Keys.GPU_TEMP) : "0";
+        String gpuShutdown = json.has(Keys.GPU_SHUTDOWN) ? json.getString(Keys.GPU_SHUTDOWN) : "0";
+        String diskTotalData = json.has(Keys.DISK_TOTAL) ? json.getString(Keys.DISK_TOTAL) : "0";
+        String diskUsedData = json.has(Keys.DISK_USED) ? json.getString(Keys.DISK_USED) : "0";
+        String memTotalData = json.has(Keys.MEM_TOTAL) ? json.getString(Keys.MEM_TOTAL) : "0";
+        String memAvailableData = json.has(Keys.MEM_AVAILABLE) ? json.getString(Keys.MEM_AVAILABLE) : "0";
 
         cpuName.textProperty().setValue(cpuNameData);
         gpuName.textProperty().setValue(gpuNameData);
